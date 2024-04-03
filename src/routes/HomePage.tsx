@@ -69,8 +69,15 @@ function HomePage() {
   return (
     <div className="App" onKeyDown={e => keyDown(e.key)}>
       <header className="App-header">
-        <p>Question: {num.num1} {calcs.operationSymbol} {num.num2}</p>
-        <p>Your Guess: {guess}</p>
+        
+        <div className='questionDiv'>
+          <p className="question">{num.num1}<br/>{num.num2}</p>
+          <p className='calc'>{calcs.operationSymbol}</p>
+          <span><p></p></span>
+          <p className='answerBox'>=</p>
+          <p className='answerGuess'>{guess}</p>
+        </div>
+        
         <p>Correct Streak: {streak}</p>
         <section className='numbox'>
         <button onClick={() => setGuess(guess + "1")}>1</button>

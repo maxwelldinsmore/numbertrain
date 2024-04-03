@@ -4,8 +4,26 @@ body {
   font-family: "Courier Prime",'mono space';
   color:white;
 }
+header button {
+  flex-grow: 1;
+  font-family: "Courier Prime",'mono space';
+  border: 2px solid #1A1A1A;
+  background-color: transparent;
+}
 
-button {
+.numbox {
+  width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+}
+div {
+  display: flex;
+  justify-content: center;
+}
+section.numbox button {
+  flex-direction: row;
+  flex: 33%;
+  flex-grow: 1;
   font-family: "Courier Prime",'mono space';
   appearance: none;
   background-color: #aaa;
@@ -34,30 +52,70 @@ button {
   width: 1000px;
   flex-wrap: wrap;
 }
-.numbox {
-  width: 1000px;
-  display: flex;
-  flex-wrap: wrap;
-}
-section.numbox button {
-  flex-direction: row;
-  flex: 33%;
-  flex-grow: 1;
-}
 
-button:disabled {
+section.numbox button:disabled {
   pointer-events: none;
 }
 
-button:hover {
+section.numbox button:hover {
   color: #fff;
   background-color: #1A1A1A;
   box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
   transform: translateY(-2px);
+  
 }
 
-button:active {
+section.numbox button:active {
   box-shadow: none;
   transform: translateY(0);
 }
 
+
+
+.questionDiv {
+  width: 15%;
+  padding-top: 15%;
+  margin: auto;
+  display: flex;
+  position: relative;
+}
+
+.calc {
+  text-align: left;
+  width: 49%;
+  position:absolute;
+    bottom:20%;
+    left:0;
+}
+
+.question {
+  text-align: right;
+  width: 49%;
+  position:absolute;
+    bottom:20%;
+    right:0;
+}
+
+span {
+  height: 0.2rem;
+  width: 100%;
+  background-color: wheat;
+  border-radius: 1000px;
+  margin: 0 20px;
+  display: block;
+  position:absolute;
+  bottom:22%;
+}
+.answerBox {
+  text-align: left;
+  position:absolute;
+  bottom:0;
+  left:0;
+}
+
+.answerGuess {
+  text-align: left;
+  position:absolute;
+    bottom:0;
+    right:0;
+}

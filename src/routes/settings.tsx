@@ -1,10 +1,12 @@
 import React from 'react';
 
-const Settings = () => {
+function Settings () {
     return (
       <section>
         <p>hello!</p>
+        
       </section>
+      
     );
   };
   

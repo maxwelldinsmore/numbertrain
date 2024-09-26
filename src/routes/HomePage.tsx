@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect } from 'react';
-import './App.css';
+import './MainGame.css';
 import { useState, FunctionComponent, Component } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 

@@ -1,7 +1,5 @@
-import React, { ChangeEvent, useEffect } from 'react';
-import './routes/App.css';
-import { useState, FunctionComponent, Component } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import './routes/MainGame.css';
+import { createBrowserRouter} from 'react-router-dom';
 
 import Settings from "./routes/Settings";
 import HomePage from './routes/HomePage';

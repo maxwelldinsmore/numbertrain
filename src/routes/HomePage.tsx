@@ -2,7 +2,6 @@ import React, { ChangeEvent, useEffect } from 'react';
 import './App.css';
 import { useState, FunctionComponent, Component } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Root from './root';
 
 
 function HomePage() {

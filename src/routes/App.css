@@ -1,3 +1,4 @@
+/* Free google font import */
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
 body {
   background-color: #1e1e1e;
@@ -53,10 +54,46 @@ section.numbox button {
   width: 1000px;
   flex-wrap: wrap;
 }
-
-section.numbox button:disabled {
-  pointer-events: none;
+.guessButton:hover {
+  color: #fff;
+  background-color: #1A1A1A;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
 }
+
+.guessButton {
+  flex: 33%;
+  flex-grow: 1;
+  font-family: "Courier Prime",'mono space';
+  appearance: none;
+  background-color: #aaa;
+  border: 2px solid #1A1A1A;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #3B3B3B;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+  width: 1000px;
+  flex-wrap: wrap;
+}
+
+
 
 section.numbox button:hover {
   color: #fff;

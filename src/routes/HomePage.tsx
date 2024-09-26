@@ -92,7 +92,7 @@ function HomePage() {
         <button onClick={() => setGuess(guess + "0")}>0</button>
         <button onClick={() => setGuess("")}>Clear</button>
         </section>
-        <button onClick={() => setAnswerState(checkAnswer())}>Guess</button>
+        <button className="guessButton" onClick={() => setAnswerState(checkAnswer())}>Guess</button>
         <p>{answerState}</p>
       </header>
     </div>

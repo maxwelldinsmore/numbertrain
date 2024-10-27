@@ -60,7 +60,17 @@ function HomePage() {
   }
 
   function keyDown(e: string) {
-    setGuess(guess + e);
+    if (e == "Enter") {
+      checkAnswer();
+    } else {
+      var test = new RegExp('[0-9.]')
+      if (test.test(e)) {
+        setGuess(guess + e);
+      }
+      if (e == "Backspace") {
+        setGuess(guess.slice(0, guess.length -1));
+      }
+    } 
   } 
 
 
@@ -91,8 +101,9 @@ function HomePage() {
         <button onClick={() => setGuess(guess + ".")}>.</button>
         <button onClick={() => setGuess(guess + "0")}>0</button>
         <button onClick={() => setGuess("")}>Clear</button>
-        </section>
         <button className="guessButton" onClick={() => setAnswerState(checkAnswer())}>Guess</button>
+        </section>
+        
         <p>{answerState}</p>
       </header>
     </div>

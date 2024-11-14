@@ -3,7 +3,8 @@ import './MainGame.css';
 import { useState, FunctionComponent, Component } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-
+// https://www.youtube.com/watch?v=wXLf18DsV-I&ab_channel=ReactConf
+// To understand hooks better
 function HomePage() {
 
   let [guess, setGuess] = useState("");
@@ -42,6 +43,7 @@ function HomePage() {
       return "Correct!";
     } else {
       setStreak(0);
+      setGuess("");
       return "Incorrect, try again";
     }
   }

@@ -4,9 +4,9 @@ import './header.css';
 import { FaTrain } from "react-icons/fa";
 import { IoIosSettings } from "react-icons/io";
 import { Button } from 'react-bootstrap';
-
+// 
 const Header = () => {
-    
+    // 
     return (
         <div>
         <header>
@@ -15,6 +15,10 @@ const Header = () => {
             </Link>
             <Link to="Settings"> 
                 <Button className='headerButton'> <IoIosSettings className="iconStyle" /></Button> 
+            </Link>
+            <Link to="Stats"> {/*  get stats icon   */}
+                <Button className='headerButton'> Stats</Button> 
+               
             </Link>
 
         </header>

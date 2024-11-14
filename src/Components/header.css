@@ -22,7 +22,7 @@ div {
 .headerButton {
   display: flex;
   flex-direction: row;
-  flex: 30%;
+  flex: 10%;
   flex-grow: 1;
   flex-wrap: wrap;
   flex-grow: 3%;
@@ -49,9 +49,10 @@ div {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  width: 45%;
+  width: 35%;
   will-change: transform;
   flex-wrap: wrap;
+  text-align: center;
   box-shadow: 2px 5px 0 #d9d4e7;
 }
 

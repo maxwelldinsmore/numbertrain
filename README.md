@@ -5,9 +5,10 @@ Orignally I created this to learn how to use React. It is inspired from the webs
 
 I have decided to put this on the backburner while I work on school.
 
-Next Additions:
--Pause Buttion
--Multiple Practices
--Combined Practice Mode
--Profile and stats
--Host online
+Next Additions:\
+-Pause feature\
+-Combined Practice Mode\
+-Time Based modes\
+-Profile and stats\
+-Online Hosting
+

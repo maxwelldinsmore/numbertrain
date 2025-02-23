@@ -4,7 +4,6 @@ function Stats () {
     return (
 		<section>
 			<p>Stats menu</p>
-		
 		</section>  
     );
 };

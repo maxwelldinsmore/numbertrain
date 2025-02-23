@@ -3,6 +3,7 @@ import './HomePage.css';
 import { useState, FunctionComponent, Component } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ModeSelect from '../Components/ModeSelect';
+import NumPad from '../Components/NumPad';
 // https://www.youtube.com/watch?v=wXLf18DsV-I&ab_channel=ReactConf
 // To understand hooks better
 
@@ -43,15 +44,16 @@ const HomePage = () => {
 	return Math.floor(Math.random() * 98 + 1)
 	}
 	
-	function keyDown(e: string) {
-	if (e == "Enter") {
+	function keyDown(e: React.KeyboardEvent) {
+	if (e.key == "Enter") {
 		checkAnswer();
+		console.log("Enter");
 	} else {
 		var test = new RegExp('[0-9.]')
-		if (test.test(e)) {
-		setGuess(guess + e);
+		if (test.test(e.key)) {
+		setGuess(guess + e.key);
 		}
-		if (e == "Backspace") {
+		if (e.key == "Backspace") {
 		setGuess(guess.slice(0, guess.length -1));
 		}
 	} 
@@ -75,7 +77,7 @@ const HomePage = () => {
 
 	let [streak, setStreak] = useState(0);
 	  return (
-		<div className="App" onKeyDown={e => keyDown(e.key)}>
+		<div className="App" onKeyDown={e => keyDown(e)} tabIndex={0}>
 		<header className="App-header">
 		</header>
 		<ModeSelect></ModeSelect>
@@ -89,23 +91,9 @@ const HomePage = () => {
 
 			<p>Correct Streak: {streak}</p>
 			<section className='numbox'>
-			<button onClick={() => setGuess(guess + "1")}>1</button>
-			<button onClick={() => setGuess(guess + "2")}>2</button>
-			<button onClick={() => setGuess(guess + "3")}>3</button>
-			<button onClick={() => setGuess(guess + "4")}>4</button>
-			<button onClick={() => setGuess(guess + "5")}>5</button>
-			<button onClick={() => setGuess(guess + "6")}>6</button>
-			<button onClick={() => setGuess(guess + "7")}>7</button>
-			<button onClick={() => setGuess(guess + "8")}>8</button>
-			<button onClick={() => setGuess(guess + "9")}>9</button>
-			<button onClick={() => setGuess(guess + ".")}>.</button>
-			<button onClick={() => setGuess(guess + "0")}>0</button>
-			<button onClick={() => setGuess("")}>Clear</button>
-			<button className="guessButton" onClick={
-				() => setAnswerState(checkAnswer())}>
-					Guess
-			</button>
-		  </section>
+			<NumPad guess={guess} setGuess={setGuess} checkAnswer={checkAnswer} setAnswerState={setAnswerState} />
+			</section>
+		  
 		  
 		  <p>{answerState}</p>
 	  </div>

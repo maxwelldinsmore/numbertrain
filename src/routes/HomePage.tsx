@@ -45,7 +45,7 @@ const HomePage = () => {
 	}
 	
 	function keyDown(e: React.KeyboardEvent) {
-	if (e.key == "Enter") {
+	if (e.key === "Enter") {
 		checkAnswer();
 		console.log("Enter");
 	} else {
@@ -53,7 +53,7 @@ const HomePage = () => {
 		if (test.test(e.key)) {
 		setGuess(guess + e.key);
 		}
-		if (e.key == "Backspace") {
+		if (e.key === "Backspace") {
 		setGuess(guess.slice(0, guess.length -1));
 		}
 	} 
@@ -90,8 +90,12 @@ const HomePage = () => {
 			</div>
 
 			<p>Correct Streak: {streak}</p>
+			
 			<section className='numbox'>
-			<NumPad guess={guess} setGuess={setGuess} checkAnswer={checkAnswer} setAnswerState={setAnswerState} />
+			<NumPad guess={guess} setGuess={setGuess} 
+				checkAnswer={checkAnswer} 
+				setAnswerState={setAnswerState} 
+			/>
 			</section>
 		  
 		  

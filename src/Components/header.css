@@ -55,20 +55,20 @@ div {
   box-shadow: 2px 5px 0 #d9d4e7;
 }
 
-.headerButton button:hover {
+.headerButton:hover {
   color: #fff;
   background-color: #1A1A1A;
   box-shadow: 2px 5px 0 #d9d4e7;
 }
 
-.headerButton button:active {
+.headerButton:active {
   transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
   box-shadow: none;
   transform: translateY(0);
   box-shadow: 0.5px 1px 0 #d9d4e7;
   transform: translateY(2px);
 }
-.headerButton button:focus {
+.headerButton:focus {
   border-color: mediumaquamarine;
 }
 /* for changing screen size, look into react specific */

@@ -2,12 +2,11 @@ import React from 'react';
 
 function Stats () {
     return (
-      <section>
-        <p>hello!</p>
-        
-      </section>
-      
+		<section>
+			<p>Stats menu</p>
+		
+		</section>  
     );
-  };
-  
-  export default Stats;
+};
+
+export default Stats;

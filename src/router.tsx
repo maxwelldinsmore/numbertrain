@@ -1,8 +1,9 @@
-import './routes/MainGame.css';
+import './routes/HomePage.css';
 import { createBrowserRouter} from 'react-router-dom';
 
 import Settings from "./routes/Settings";
 import HomePage from './routes/HomePage';
+import Stats from './routes/Stats';
 import Root from './routes/Root';
 const router = createBrowserRouter([
   {
@@ -10,7 +11,8 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
     { path: "", element: <HomePage /> },
-    { path: "/Settings", element: <Settings />}
+    { path: "/Settings", element: <Settings />},
+    { path: "/Stats", element: <Stats /> }
     ]
   },
 ]);

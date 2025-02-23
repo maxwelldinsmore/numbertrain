@@ -1,4 +1,4 @@
-import Header from "../Components/header";
+import Header from "../Components/Header";
 import {Outlet} from "react-router-dom";
 const Root = () => { 
 
@@ -8,6 +8,6 @@ const Root = () => {
             <Outlet/>
         </div>
       );
-    };
+};
     
-    export default Root;
+export default Root;

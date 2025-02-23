@@ -22,10 +22,10 @@ div {
 .headerButton {
   display: flex;
   flex-direction: row;
-  flex: 10%;
+  flex: 30%;
   flex-grow: 1;
   flex-wrap: wrap;
-  flex-grow: 3%;
+  flex-grow: 10%;
   font-family: "Courier Prime",'mono space';
   appearance: none;
   background-color: #aaa;
@@ -36,11 +36,10 @@ div {
   cursor: pointer;
   display: inline-block;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: normal;
   min-height: 60px;
-  min-width: 0;
-  outline: none;
+  min-width: 200px;
   padding: 20px 30px;
   margin-bottom: 20px;
   margin-right: 5px;
@@ -49,7 +48,7 @@ div {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  width: 35%;
+  width: 10%;
   will-change: transform;
   flex-wrap: wrap;
   text-align: center;

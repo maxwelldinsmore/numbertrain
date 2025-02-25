@@ -2,8 +2,8 @@ import React, { ChangeEvent, useEffect } from 'react';
 import './HomePage.css';
 import { useState, FunctionComponent, Component } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import ModeSelect from '../Components/ModeSelect';
-import NumPad from '../Components/NumPad';
+import ModeSelect from '../components/ModeSelect';
+import NumPad from '../components/NumPad';
 // https://www.youtube.com/watch?v=wXLf18DsV-I&ab_channel=ReactConf
 // To understand hooks better
 

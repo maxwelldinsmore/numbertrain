@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Header.css';
+import './header.css';
 import { FaTrain } from "react-icons/fa";
 import { IoIosSettings } from "react-icons/io";
 import { Button } from 'react-bootstrap';

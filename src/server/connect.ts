@@ -26,5 +26,22 @@ async function main() {
         await client.close();
     }
 }
+async function getTopScore() {
+    const client = new MongoClient(process.env.ATLAS_URI);
+    try {
+        await client.connect();
+        const database = client.db('mathgame');
+        const collection = database.collection('numbertrain');
+        const query = { score: { $gt: 0 } };
+        const options = { sort: { score: -1 }, limit: 1 };
+        const result = await collection.findOne(query, options);
+        console.log(result);
+        return result.score;
+    } catch (e) {
+        console.error('Error:', e);
+    } finally {
+        await client.close();
+    }
+}
 
-main();
+export default getTopScore;

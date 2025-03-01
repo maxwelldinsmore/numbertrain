@@ -16,6 +16,10 @@ div {
   justify-content: center;
 }
 
+.App:focus {
+  outline: wheat 4px;
+  border: blue 2px solid;
+}
 
 
 

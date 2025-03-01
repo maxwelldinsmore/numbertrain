@@ -8,7 +8,9 @@
     "@types/jest": "^27.5.2",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
+    "dotenv": "^16.4.7",
     "eslint-config-react-app": "^7.0.1",
+    "mongodb": "^6.14.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0",
@@ -25,10 +27,17 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "env": {
+      "node": true,
+      "browser": true,
+      "es6": true
+      
+    },
     "extends": [
       "react-app",
       "react-app/jest"
     ]
+    
   },
   "browserslist": {
     "production": [

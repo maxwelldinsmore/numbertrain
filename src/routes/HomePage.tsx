@@ -1,111 +1,151 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import './HomePage.css';
-import { useState, FunctionComponent, Component } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import ModeSelect from '../components/ModeSelect';
-import NumPad from '../components/NumPad';
-// https://www.youtube.com/watch?v=wXLf18DsV-I&ab_channel=ReactConf
-// To understand hooks better
-
-
+import ModeSelect from '../Components/ModeSelect';
+import NumPad from '../Components/NumPad';
 
 const HomePage = () => {
-	function checkAnswer() {
+    const [timer, setTimer] = useState(10); // Set initial time (e.g., 60 seconds)
+    const [gameStarted, setGameStarted] = useState(false);
+    const [isGameOver, setIsGameOver] = useState(false);
+    const [guess, setGuess] = useState<string>("");
+    const [answerState, setAnswerState] = useState("");
+    const [num, setNum] = useState({ num1: calc(), num2: calc() });
+    const [calcs, setCalcs] = useState({ operationType: "Addition", operationSymbol: "+" });
+    const [keyInput, setKeyInput] = useState({ keyDown: "" });
+    const [streak, setStreak] = useState(0);
 
-		let guessCheck = 0;
-		try {
-			guessCheck = Number(guess);
-		} catch (error) {
-			console.error(error);
-			return "Error - non valid Integer";
+    useEffect(() => {
+        if (gameStarted && timer > 0) {
+            const intervalId = setInterval(() => {
+                setTimer(prevTime => prevTime - 1);
+            }, 1000);
+
+            // Cleanup function to clear interval when component unmounts
+            return () => clearInterval(intervalId);
+        } else if (timer === 0) {
+            setIsGameOver(true);
+        }
+    }, [gameStarted, timer]);
+
+    useEffect(() => {
+        if (guess !== "") {
+            setGameStarted(true);
+        }
+    }, [guess]);
+
+	useEffect(() => {
+		if (gameStarted) {
+			const appDiv = document.querySelector('.App') as HTMLDivElement;
+			if (appDiv) {
+				appDiv.focus();
+			}
 		}
-		if (num.num1 + num.num2 === guessCheck) {
-			setGuess("");
-			setStreak(streak + 1);
-			newQuestion();
-			return "Correct!";
-		} else {
-			setStreak(0);
-			setGuess("");
-			return "Incorrect, try again";
-		}
-	}
-	
-	const newQuestion = () => {
-		setNum(prevnum => ({
-			...prevnum,
-			num1: calc(),
-			num2: calc()
-		}));
-	}
-	
-	
-	function calc () {
-	return Math.floor(Math.random() * 98 + 1)
-	}
-	
-	function keyDown(e: React.KeyboardEvent) {
-	if (e.key === "Enter") {
-		checkAnswer();
-		console.log("Enter");
-	} else {
-		var test = new RegExp('[0-9.]')
-		if (test.test(e.key)) {
-		setGuess(guess + e.key);
-		}
-		if (e.key === "Backspace") {
-		setGuess(guess.slice(0, guess.length -1));
-		}
-	} 
-	} 
-	let [guess, setGuess] = useState("");
-	let [answerState, setAnswerState] = useState("");
+	}, [gameStarted]);
 
-	let [num, setNum] = useState({
-	num1: calc(),
-	num2: calc()
-	});
+    function checkAnswer() {
+        let guessCheck = 0;
+        try {
+            guessCheck = Number(guess);
+        } catch (error) {
+            console.error(error);
+            return "Error - non valid Integer";
+        }
+        if (num.num1 + num.num2 === guessCheck) {
+            setGuess("");
+            setStreak(streak + 1);
+            newQuestion();
+            return "Correct!";
+        } else {
+            setStreak(0);
+            setGuess("");
+            return "Incorrect, try again";
+        }
+    }
 
-	let [calcs, setCalcs] = useState({
-	operationType: "Addition",
-	operationSymbol: "+"
-	});
+    const newQuestion = () => {
+        setNum(prevnum => ({
+            ...prevnum,
+            num1: calc(),
+            num2: calc()
+        }));
+    }
 
-	let [keyInput, setKeyInput] = useState({
-	keyDown: ""
-	});
+	useEffect(() => {
 
-	let [streak, setStreak] = useState(0);
-	  return (
-		<div className="App" onKeyDown={e => keyDown(e)} tabIndex={0}>
-		<header className="App-header">
-		</header>
-		<ModeSelect></ModeSelect>
-			<div className='questionDiv'>
-				<p className="question">{num.num1}<br/>{num.num2}</p>
-				<p className='calc'>{calcs.operationSymbol}</p>
-				<span><p></p></span>
-				<p className='answerBox'>=</p>
-				<p className='answerGuess'>{guess}</p>
-			</div>
+		const handleKeyDown = (e: KeyboardEvent) => {
+			keyDown(e);
+		};
 
-			<p>Correct Streak: {streak}</p>
+		window.addEventListener('keydown', handleKeyDown);
+
+		// Cleanup function to remove event listener when component unmounts
+		return () => {
+			window.removeEventListener('keydown', handleKeyDown);
+		};
+        
+    }, [guess]);
+
+    function calc() {
+        return Math.floor(Math.random() * 98 + 1);
+    }
+
+    function keyDown(e: KeyboardEvent) {
+		console.log("Keydown");
+        if (e.key === "Enter") {
+            checkAnswer();
+            console.log("Enter");
+        } else {
+			var test = new RegExp('^[0-9]$');
+            if (test.test(e.key)) {
+                setGuess(guess + e.key);
+            }
+            if (e.key === "Backspace") {
+                setGuess(guess.slice(0, guess.length - 1));
+            }
+        }
+    }
+
+    if (isGameOver) {
+        return (
+            <div className="App">
+                <header className="App-header">
+                    <h1>Game Over</h1>
+                    <p>Your final streak: {streak}</p>
+                    <button onClick={() => window.location.reload()}>Restart</button>
+                </header>
+            </div>
+        );
+    }
+
+    return (
+        <div className="App" 
+			tabIndex={0}>
 			
-			<section className='numbox'>
-			<NumPad guess={guess} setGuess={setGuess} 
-				checkAnswer={checkAnswer} 
-				setAnswerState={setAnswerState} 
-			/>
-			</section>
-		  
-		  
-		  <p>{answerState}</p>
-	  </div>
-  );
+            <header className="App-header">
+            </header>
+            <ModeSelect></ModeSelect>
+            <p>Time Left: {timer}</p>
+            <div className='questionDiv'>
+                <p className="question">{num.num1}<br />{num.num2}</p>
+                <p className='calc'>{calcs.operationSymbol}</p>
+                <span><p></p></span>
+                <p className='answerBox'>=</p>
+                <p className='answerGuess'>{guess}</p>
+            </div>
+
+            <p>Correct Streak: {streak}</p>
+
+            <section className='numbox'>
+                <NumPad guess={guess} setGuess={setGuess}
+                    checkAnswer={checkAnswer}
+                    setAnswerState={setAnswerState}
+                />
+            </section>
+
+            <p>{answerState}</p>
+        </div>
+    );
 }
-
-
-
-
 
 export default HomePage;

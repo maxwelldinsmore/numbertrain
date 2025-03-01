@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import './HomePage.css';
+import '../css/HomePage.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ModeSelect from '../Components/ModeSelect';
 import NumPad from '../Components/NumPad';
 
 const HomePage = () => {
-    const [timer, setTimer] = useState(10); // Set initial time (e.g., 60 seconds)
+    const [timer, setTimer] = useState(20); // Set initial time (e.g., 60 seconds)
     const [gameStarted, setGameStarted] = useState(false);
     const [isGameOver, setIsGameOver] = useState(false);
     const [guess, setGuess] = useState<string>("");
@@ -79,6 +79,10 @@ const HomePage = () => {
 
 		window.addEventListener('keydown', handleKeyDown);
 
+        const appDiv = document.querySelector('.App') as HTMLDivElement;
+			if (appDiv) {
+				appDiv.focus();
+		}
 		// Cleanup function to remove event listener when component unmounts
 		return () => {
 			window.removeEventListener('keydown', handleKeyDown);

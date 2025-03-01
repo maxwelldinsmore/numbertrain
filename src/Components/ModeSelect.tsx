@@ -5,7 +5,7 @@ import { CgMathPercent } from "react-icons/cg";
 import { TbMathXMinusY } from "react-icons/tb";
 import { TbMathXPlusY } from "react-icons/tb";
 
-import './ModeSelect.css';
+import '../css/ModeSelect.css';
 
 const ModeSelect = () => {
     const [selectedMode, setSelectedMode] = useState<string>("");

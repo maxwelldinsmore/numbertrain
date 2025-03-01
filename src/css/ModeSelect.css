@@ -41,9 +41,6 @@
     box-shadow: none;
     animation: colorChange 0.3s ease-in-out;
   }
-  .modeButton:focus {
-    border-color: mediumaquamarine;
-  }
   
   @keyframes colorChange {
     0% {
@@ -67,4 +64,5 @@
   .selected {
     background-color: #1A1A1A;
     color: white;
+    border-color: #fff;
   }

@@ -18,7 +18,7 @@ div {
 
 .App:focus {
   outline: wheat 4px;
-  border: blue 2px solid;
+  background-color: rgb(106, 104, 100);
 }
 
 

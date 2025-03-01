@@ -1,5 +1,5 @@
 import React from 'react';
-import './NumPad.css';
+import '../css/NumPad.css';
 interface NumPadProps {
   guess: string;
   setGuess: (guess: string) => void;

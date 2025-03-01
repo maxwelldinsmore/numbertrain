@@ -1,10 +1,10 @@
-import './routes/HomePage.css';
+import './css/HomePage.css';
 import { createBrowserRouter} from 'react-router-dom';
 
-import Settings from "./routes/Settings";
-import HomePage from './routes/HomePage';
-import Stats from './routes/Stats';
-import Root from './routes/root';
+import Settings from "./Routes/Settings";
+import HomePage from './Routes/HomePage';
+import Stats from './Routes/Stats';
+import Root from './Routes/root';
 const router = createBrowserRouter([
   {
     path: "/",

@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "server"  ]
+, "server", "public/react-app-env.d.ts"  ]
 }

@@ -5,6 +5,11 @@ import Settings from "./Routes/Settings";
 import HomePage from './Routes/HomePage';
 import Stats from './Routes/Stats';
 import Root from './Routes/root';
+
+/*
+* Router element using reacts router to create paths 
+* associated with their elements
+*/
 const router = createBrowserRouter([
   {
     path: "/",

@@ -4,39 +4,48 @@ import { BiMath } from "react-icons/bi";
 import { CgMathPercent } from "react-icons/cg";
 import { TbMathXMinusY } from "react-icons/tb";
 import { TbMathXPlusY } from "react-icons/tb";
-
+import MathMode from "../mathClasses/mathMode";
 import '../css/ModeSelect.css';
 
-const ModeSelect = () => {
+interface ModeSelectProps {
+    mathMode: MathMode;
+    handleModeSelect: (mode: string) => void;
+}
+
+const ModeSelect: React.FC<ModeSelectProps> = ({ mathMode}) => {
+
     const [selectedMode, setSelectedMode] = useState<string>("");
 
-    const handleModeSelect = (mode: string) => {
+    const handleModeChange = (mode: string) => {
         setSelectedMode(mode);
+        mathMode.operationSymbol = mode;
+
     };
+
 
     return (
         <div className="modeSelectionDiv">
             <Button
-                className={`modeButton ${selectedMode === "addition" ? "selected" : ""}`}
-                onClick={() => handleModeSelect("addition")}
+                className={`modeButton ${selectedMode === "?" ? "selected" : ""}`}
+                onClick={(e) => handleModeChange("?")}
             >
                 <BiMath fontSize={25} />
             </Button>
             <Button
-                className={`modeButton ${selectedMode === "multiplication" ? "selected" : ""}`}
-                onClick={() => handleModeSelect("multiplication")}
+                className={`modeButton ${selectedMode === "+" ? "selected" : ""}`}
+                onClick={() => handleModeChange("+")}
             >
                 <TbMathXPlusY fontSize={25} />
             </Button>
             <Button
-                className={`modeButton ${selectedMode === "subtraction" ? "selected" : ""}`}
-                onClick={() => handleModeSelect("subtraction")}
+                className={`modeButton ${selectedMode === "-" ? "selected" : ""}`}
+                onClick={() => handleModeChange("-")}
             >
                 <TbMathXMinusY fontSize={25} />
             </Button>
             <Button
-                className={`modeButton ${selectedMode === "percentage" ? "selected" : ""}`}
-                onClick={() => handleModeSelect("percentage")}
+                className={`modeButton ${selectedMode === "/" ? "selected" : ""}`}
+                onClick={() => handleModeChange("/")}
             >
                 <CgMathPercent fontSize={25} />
             </Button>

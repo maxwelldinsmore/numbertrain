@@ -1,19 +1,27 @@
+// TODO: Comment main Files
+// TODO: Find app ICON
+// TODO: Finish Mode Adding
+// TODO: Change gameStarted focus 
+// TODO: ON tabout add pause screen in
+
+
+
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import '../css/HomePage.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ModeSelect from '../Components/ModeSelect';
 import NumPad from '../Components/NumPad';
+import MathMode from '../mathClasses/mathMode';
 
 const HomePage = () => {
-    const [timer, setTimer] = useState(20); // Set initial time (e.g. 60 seconds)
+    const [timer, setTimer] = useState(20); // Set initial time (e.g., 60 seconds)
     const [gameStarted, setGameStarted] = useState(false);
     const [isGameOver, setIsGameOver] = useState(false);
     const [guess, setGuess] = useState<string>("");
     const [answerState, setAnswerState] = useState("");
-    const [num, setNum] = useState({ num1: calc(), num2: calc() });
-    const [calcs, setCalcs] = useState({ operationType: "Addition", operationSymbol: "+" });
     const [correctGuesses, setCorrectGuesses] = useState(0);
-
+    const [mathMode, setMathMode] = useState<MathMode>(new MathMode("+"));
+    const [num, setNum] = useState({ num1: mathMode.num1, num2: mathMode.num2 });
 
     // If game is started timer will tick down
     useEffect(() => {
@@ -44,7 +52,7 @@ const HomePage = () => {
             console.error(error);
             return "Error - non valid Integer";
         }
-        if (num.num1 + num.num2 === guessCheck) {
+        if (mathMode.checkAnswer(guessCheck)) {
             setGuess("");
             setCorrectGuesses(correctGuesses + 1);
             newQuestion();
@@ -55,52 +63,27 @@ const HomePage = () => {
         }
     }
 
-
-
-    /*
-    * Handles user input for the game, only accepting numeric inputs
-    * aswell as backspace and enter
-    */
-	useEffect(() => {
-		const handleKeyDown = (e: KeyboardEvent) => {
-			keyDown(e);
-		};
-		window.addEventListener('keydown', handleKeyDown);
-
-        const appDiv = document.querySelector('.App') as HTMLDivElement;
-			if (appDiv) {
-				appDiv.focus();
-		}
-		// Cleanup function to remove event listener when component unmounts
-		return () => {
-			window.removeEventListener('keydown', handleKeyDown);
-		};
-        
-    }, [guess]);
-
-    // Will be deprecated
-    function calc() {
-        return Math.floor(Math.random() * 98 + 1);
+    function UpdateMode(mode: string) {
+        console.log("Mode Updated");
+        const newMathMode = new MathMode(mode);
+        newMathMode.generateNumbers();
+        setMathMode(newMathMode);
+        setNum({ num1: newMathMode.num1, num2: newMathMode.num2 });
     }
 
-    // Will be deprecated
     const newQuestion = () => {
-        setNum(prevnum => ({
-            ...prevnum,
-            num1: calc(),
-            num2: calc()
-        }));
+        mathMode.generateNumbers();
+        setNum({ num1: mathMode.num1, num2: mathMode.num2 });
     }
-
 
     // Gets key input which updates guess
     function keyDown(e: KeyboardEvent) {
-		console.log("Keydown");
+        console.log("Keydown");
         if (e.key === "Enter") {
             checkAnswer();
             console.log("Enter");
         } else {
-			var test = new RegExp('^[0-9]$');
+            var test = new RegExp('^[0-9]$');
             if (test.test(e.key)) {
                 setGuess(guess + e.key);
             }
@@ -110,10 +93,22 @@ const HomePage = () => {
         }
     }
 
-    /*
-    * When game is over, displays stats and restart button
-    * TODO: Finish design and add stat bar
-    */
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            keyDown(e);
+        };
+        window.addEventListener('keydown', handleKeyDown);
+
+        const appDiv = document.querySelector('.App') as HTMLDivElement;
+        if (appDiv) {
+            appDiv.focus();
+        }
+        // Cleanup function to remove event listener when component unmounts
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [guess]);
+
     if (isGameOver) {
         return (
             <div className="App">
@@ -126,37 +121,37 @@ const HomePage = () => {
         );
     }
 
-    /*
+/*
     * Returns modified screen when game has started,
     * removing modeSelect bar and adding in timer
     */
     if (gameStarted) {
         return (
             <div className="App" tabIndex={0}>
-            <header className="App-header"/>
-            <div className='topBar'>
-                <p>Time Left: {timer}</p>
+                <header className="App-header" />
+                <div className='topBar'>
+                    <p>Time Left: {timer}</p>
+                </div>
+
+                <div className='questionDiv'>
+                    <p className="question">{num.num1}<br />{num.num2}</p>
+                    <p className='calc'>{mathMode.operationSymbol}</p>
+                    <span><p></p></span>
+                    <p className='answerBox'>=</p>
+                    <p className='answerGuess'>{guess}</p>
+                </div>
+
+                <p>Correct Streak: {correctGuesses}</p>
+
+                <section className='numbox'>
+                    <NumPad guess={guess} setGuess={setGuess}
+                        checkAnswer={checkAnswer}
+                        setAnswerState={setAnswerState}
+                    />
+                </section>
+
+                <p>{answerState}</p>
             </div>
-
-            <div className='questionDiv'>
-                <p className="question">{num.num1}<br />{num.num2}</p>
-                <p className='calc'>{calcs.operationSymbol}</p>
-                <span><p></p></span>
-                <p className='answerBox'>=</p>
-                <p className='answerGuess'>{guess}</p>
-            </div>
-
-            <p>Correct Streak: {correctGuesses}</p>
-
-            <section className='numbox'>
-                <NumPad guess={guess} setGuess={setGuess}
-                    checkAnswer={checkAnswer}
-                    setAnswerState={setAnswerState}
-                />
-            </section>
-
-            <p>{answerState}</p>
-        </div>
         );
     }
 
@@ -166,17 +161,18 @@ const HomePage = () => {
     *
     */
     return (
-        <div className="App" 
-			tabIndex={0}>
-			
-            <header className="App-header"/>
+        <div className="App" tabIndex={0}>
+            <header className="App-header" />
             <div className='topBar'>
-                <ModeSelect />
+                <ModeSelect
+                    mathMode={mathMode}
+                    handleModeSelect={UpdateMode}
+                />
             </div>
-            
+
             <div className='questionDiv'>
                 <p className="question">{num.num1}<br />{num.num2}</p>
-                <p className='calc'>{calcs.operationSymbol}</p>
+                <p className='calc'>{mathMode.operationSymbol}</p>
                 <span><p></p></span>
                 <p className='answerBox'>=</p>
                 <p className='answerGuess'>{guess}</p>
